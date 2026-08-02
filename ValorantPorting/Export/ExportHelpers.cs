@@ -169,7 +169,9 @@ public static class ExportHelpers
                     bool foundAttachmentMats = false;
                     
                     //scope, muzzle
-                    string[] matNames = { "3p MaterialOverrides", "1p MaterialOverrides" };
+                    string[] matNames = attachmentTuple.Item1[i] == "Barrel"
+                        ? new[] { "3p MaterialOverrides" }
+                        : new[] { "3p MaterialOverrides", "1p MaterialOverrides" };
                     foreach (var matName in matNames)
                     {
                         var styleAttachmentMats = GetStyleAttatchmentMats(style, matName, attachmentTuple.Item1[i]);
@@ -728,9 +730,10 @@ public static class ExportHelpers
                         exporter.TryWriteToDir(App.AssetsFolder, out _, out SavedFilePath);
                         break;
                     }
-                    case UTexture2D texture:
+                   case UTexture2D texture:
                     {
                         var path = GetExportPath(obj, "png");
+                        LogSilencerDiagnostic($"[texture save] name={texture.Name}, path={path}, alreadyExists={File.Exists(path)}");
                         if (File.Exists(path)) return;
                         Directory.CreateDirectory(path.Replace('\\', '/').SubstringBeforeLast('/'));
 
