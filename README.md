@@ -1,1 +1,1 @@
-﻿Check out https://github.com/Ka1serM/ValorantPorting/releases for the updated verison!
+﻿Check out https://github.com/Ka1serM/ValorantPorting/ for the updated version!
